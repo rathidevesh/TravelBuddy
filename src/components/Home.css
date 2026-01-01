@@ -1,0 +1,312 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ysabeau+Office:wght@100&display=swap');
+
+
+.bookbutton{
+  border: none;
+  background: #DDC3A5;
+  color: #000000;
+  font-weight: 80;
+  padding: 10px;
+  text-transform: uppercase;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease 0s;
+  
+}
+
+.bookbutton:hover {
+  color: #404040;
+  font-weight: 500;
+  letter-spacing: 3px;
+  background: none;
+  transition: all 0.3s ease 0s;
+}
+
+.homepageimage{
+    margin: 5px 0px 0px 0px;
+    padding: 5vh 0;
+    color: white;
+    width: 100%;
+    height: 45vh;
+    min-width: 400px;
+    min-height: 310px;
+    background-color: #201E20;
+    position:relative;
+    
+    
+}
+
+.homepageimage img{
+    position: absolute;
+    top: 17vh;
+    right: 5vw;
+    
+    
+   
+}
+.homepageimage h2{
+    padding: 0px 0px 0px 35px;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 3em;
+    display: grid;
+}
+
+.homepageimage p{
+    padding: 0px 0px 0px 35px;
+    font-size: 1.5em;
+}
+
+@media screen and (max-width: 671px) {
+    .homepageimage img {
+      display: none;
+    }
+    .homepageimage{
+        padding: 10vh 0vh 0vh 0vh;
+        text-align: center;
+        height: 35vh;
+    }
+  }
+
+.card-container{
+    min-width: 375px;
+    background-color: white;
+    text-align: center;
+    font-family: 'Mukta', sans-serif;
+    color: black;
+    padding: 25vh 0px 25px 0px;
+}
+
+@media  screen and (max-width:672px) {
+    .card-container{
+        padding: 3px ;
+       
+    }
+    .card-container h2{
+        text-align: center;
+    }
+    
+}
+
+@media screen and (min-width:2230px)  {
+    .card-container{
+        padding: 3px ;
+       
+    }
+    .card-container h2{
+        font-size: 3em;
+        text-align: center;
+       
+    }
+}
+
+.card-container-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.card{
+    max-width: 18rem;
+    margin: 0px 10px;
+    
+}
+
+@media screen and (max-width:625px) {
+    .card-container-item{
+        min-width: 375px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .card{
+        max-width: 18rem;
+        margin: 1vh 13vw;
+        
+        
+    }
+}
+
+@media screen and (min-width:629px) and (max-width:1245px) {
+    .card-container-item {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .card {
+        width: calc(50% - 20px);
+        margin: 10px;
+      }
+}
+
+.about {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    margin: 20vh;
+    font-size: 1.5vh;
+
+  }
+  
+  .aboutimage {
+    flex: 1;
+    background-color: #DDC3A5;
+    border-radius: 20px 0px 0px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+  }
+  
+  .aboutinfo {
+    flex: 1;
+    font-family: 'Titillium Web', sans-serif;
+    color: white;
+    border-radius: 0px 20px 20px 0px;
+    background-color: #201e20;
+    padding: 20px;
+    height: 40vh;
+    
+    overflow: auto; /* Added to enable vertical scrolling */
+  }
+
+  .aboutinfo h3{
+    color: white;
+  }
+  
+  .aboutimage img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+  }
+  
+  @media screen and (max-width: 1257px) {
+    .about {
+      max-width: 800px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 10vh 1vh 0vh 5vw;
+      text-align: center;
+      font-size: 1.5vh;
+    }
+  
+    .aboutimage {
+      background-color: white;
+    }
+  
+    .aboutinfo {
+      border-radius: 20px;
+      text-align: center;
+      font-size: 1vw;
+      overflow: auto; /* Added to enable vertical scrolling */
+    }
+  }
+  
+  @media screen and (max-width: 3324px) {
+    .aboutinfo {
+      font-size: 2em;
+    }
+  }
+  
+  
+
+  .benefits h3 {
+    text-align: center;
+    font-family: 'Merriweather', serif;
+    font-size: 50px;
+    margin-top: 1vw;
+  }
+  
+  .benefits h5 {
+    text-align: center;
+    font-family: 'Ysabeau Office', sans-serif;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .benefits h3 {
+      font-size: 40px;
+      margin-top: 1vw;
+    }
+  
+    .benefits h5 {
+      font-size: 16px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .benefits h3 {
+      font-size: 30px;
+      margin-top: 2vw;
+    }
+  
+    .benefits h5 {
+      font-size: 14px;
+    }
+  }
+
+.benefitCard{
+    margin: 5vh 2vh;
+    width: 25vw;
+    display: inline-block;
+    position: relative;
+}
+
+.benefitCard img{
+    border-radius: 20px;
+    
+    
+  }
+
+@media screen and (max-width:827px) {
+    .benefitCard{
+        margin: 5vh 1vh;
+        width: 225px;
+        height: 200px;
+        display: inline-block;
+        position: relative;
+    }
+    
+    .benefitCard img{
+        border-radius: 20px;
+        width: 24vw;
+        
+      }
+}
+
+@media screen and(max-width:441px) {
+    .benefitCard{
+        margin: 5vh 0vh;
+        width: 80vw;
+        height: 200px;
+        display: inline-block;
+        position: relative;
+    }
+    
+    .benefitCard img{
+        border-radius: 20px;
+        width: 50vw;
+        
+      }
+}
+
+  
+
+  
+  
+  
+
+  
+  
+    
+   
+
+    

@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Caprasimo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bacasime+Antique&display=swap');
+
+.signupimage{
+    font-family: 'Caprasimo', cursive;
+    background-color: #201E20;
+    min-width: 450px;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    text-align: center;
+    color: aliceblue;
+    padding: 2vh 0vh 0vh 0vh;
+}
+
+.card1{
+    background-color: #DDC3A5;
+    padding: 10px 10px;
+    border-radius: 20px ;
+    width: 25rem;
+}
+.signupdetails{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h3{
+    color:#201E20;
+    padding: 5vh 0vw 2vh 0vw;
+    text-align: center;
+    font-family: 'Bacasime Antique', serif;
+}
+
+
+
+
+@media screen and (max-width:1233px) {
+    .signupdetails{
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 729px) {
+    .signupimage{
+        
+        background-color: #201E20;
+        min-width: 450px;
+        height: 18vh;
+        display: flex;
+        justify-content: center;
+        align-items: end;
+        text-align: center;
+        color: aliceblue;
+        padding: 2vh 0vh 0vh 0vh;
+    }
+    .signimg img {
+      width: calc(100% - 20px);
+    }
+    .signupdetails{
+        padding: 0px 0px 0px 20vw;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
+    .card1{
+        background-color: #DDC3A5;
+         border-radius: 20px ;
+        width: 25rem;
+    }
+        
+  }

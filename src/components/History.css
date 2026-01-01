@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300&display=swap');
+
+center{
+    font-family: 'Playfair Display', serif;
+    padding: 5vh 0vh  ;
+}
+.historycontainer{
+    font-family: 'Mulish', sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.historycontainer h5{
+    font-weight: bold;
+}
+
+@media screen and (max-width:660px) {
+    center{
+        padding: 10vh 0vh 0vh 0vh ;
+    }
+}

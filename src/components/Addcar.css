@@ -1,0 +1,34 @@
+.addcaritem{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card4{
+    margin: 4vh 4vw;
+    background-color: #201E20;
+    color: aliceblue;
+    width: 25rem;
+    padding: 2vh;
+    border-radius: 20px 0px 20px 0px;
+}
+
+.card5{
+    min-width: 20rem;
+    border: 1px solid #201E20;
+    border-radius: 10px;
+}
+
+@media screen and (max-width:1248px){
+    .addcaritem{
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width:393px) {
+    .card5{
+        min-width: none;
+        width: 18rem;
+        
+    }
+}

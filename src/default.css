@@ -1,0 +1,57 @@
+/* app.css */
+.signupimg {
+    /* height: 200px; */
+    /* width: 100%; */
+    /* background-image: url("https://t4.ftcdn.net/jpg/02/84/58/23/360_F_284582325_AMduN9aBbe0uF7uScju5oyTqN8HPsiJt.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: lighten; */
+  
+    /* background-position: center; */ 
+    /* background: linear-gradient(to left, #333, #333 50%, #eee 75%, #333 75%);
+    height: 100%;
+    width: 100%;
+    /* display : flex;  */
+    /* justify-content: center; */
+    /* align-items: center;  */
+    
+  }
+    
+    
+  #loginimg {
+    /* background: url("https://images5.alphacoders.com/913/913926.jpg");
+    background-size: cover;                      
+    background-repeat:   no-repeat;
+    background-position: center center; */
+  }
+  
+  #navbar{
+    /* background-color: rgb(10, 102, 71); */
+  }
+  
+  html, body {
+    /* min-height: 100%; */
+  }
+  
+  .aboutUs{
+    /* background-color: rgb(67, 67, 67);
+    color: aliceblue;
+    text-align: justify; */
+  }
+  .card-title{
+    /* color: rgb(255, 255, 255);
+    font-size:xx-large;
+    text-align: center; */
+  }
+  
+  .card-img-top{
+    /* border-radius: 30px; */
+  }
+  
+  .card text{
+    /* border-color: aliceblue; */
+  }
+  
+  .carouselContainer{
+    /* background-color: rgb(170, 167, 167); */
+  }

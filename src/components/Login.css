@@ -1,0 +1,28 @@
+.loginimg h2{
+    margin: 2vh 0vw;
+    padding: 4vh 0vw;
+    text-align: center;
+    color: black;
+}
+
+.loginbody{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card2{
+    background-color: #201E20;
+    padding: 10px 10px;
+    border-radius: 20px ;
+    width: 25rem;
+    color: white;
+}
+
+@media screen and (max-width:394px) {
+    .card2{
+        width: 22rem;
+    }
+}
+
