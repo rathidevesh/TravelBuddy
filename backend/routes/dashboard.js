@@ -3,6 +3,8 @@ const router = express.Router();
 const Car = require('../models/Addcar');
 const Booking = require('../models/Booking');
 const fetchUser = require('../middleware/fetchUser');
+const mongoose = require("mongoose");
+
 
 /* ===================== SUMMARY ===================== */
 router.get('/summary', fetchUser, async (req, res) => {
@@ -24,10 +26,22 @@ router.get('/summary', fetchUser, async (req, res) => {
     { $group: { _id: null, total: { $sum: { $toDouble: "$carcost" } } } }
   ]);
 
+  
+
   const spendingAgg = await Booking.aggregate([
-    { $match: { bookeduser: userId } },
-    { $group: { _id: null, total: { $sum: { $toDouble: "$carcost" } } } }
-  ]);
+  {
+    $match: {
+      bookeduser: new mongoose.Types.ObjectId(userId)
+    }
+  },
+  {
+    $group: {
+      _id: { $month: "$date" },
+      total: { $sum: { $toDouble: "$carcost" } }
+    }
+  }
+]);
+
 
   res.json({
     totalVehicles,
@@ -70,14 +84,19 @@ router.get('/monthly-revenue', fetchUser, async (req, res) => {
   ]);
 
   const spending = await Booking.aggregate([
-    { $match: { bookeduser: userId } },
-    {
-      $group: {
-        _id: { $month: { $toDate: "$date" } },
-        total: { $sum: { $toDouble: "$carcost" } }
-      }
+  {
+    $match: {
+      bookeduser: new mongoose.Types.ObjectId(userId)
     }
-  ]);
+  },
+  {
+    $group: {
+      _id: { $month: "$date" },
+      total: { $sum: { $toDouble: "$carcost" } }
+    }
+  }
+]);
+
 
   res.json({ earnings, spending });
 });

@@ -45,7 +45,10 @@ const Dashboard = () => {
         const revenueData = await revenueRes.json()
         const bookingsData = await bookingsRes.json()
         const typesData = await typesRes.json()
-
+        console.log("Summary Data " , summaryData);
+        console.log("Revenue Data " , revenueData);
+        console.log("Booking Data " , bookingsData);
+        console.log("Types Data " , typesData);
         setSummary(summaryData)
         setRevenue(revenueData)
         setBookings(bookingsData)
