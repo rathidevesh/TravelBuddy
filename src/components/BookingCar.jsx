@@ -4,6 +4,16 @@ import noteContext from '../context/notes/NoteContext';
 import { useNavigate } from 'react-router-dom';
 import History from './History';
 
+const loadRazorpay = () => {
+  return new Promise((resolve) => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+};
+
 
 const BookingCar = (props) => {
   const location = useLocation();
@@ -61,56 +71,133 @@ const BookingCar = (props) => {
     carphoto: carphoto,
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+
+  // Without Payment
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
   
-    // Check if the car is already booked for the selected dates
-    const isCarBooked = bookings.some((booking) => {
-      const bookingStartDate = new Date(booking.startDate);
-      const bookingEndDate = new Date(booking.endDate);
-      const selectedStartDate = new Date(startDate);
-      const selectedEndDate = new Date(endDate);
+  //   // Check if the car is already booked for the selected dates
+  //   const isCarBooked = bookings.some((booking) => {
+  //     const bookingStartDate = new Date(booking.startDate);
+  //     const bookingEndDate = new Date(booking.endDate);
+  //     const selectedStartDate = new Date(startDate);
+  //     const selectedEndDate = new Date(endDate);
   
-      // Check if the selected dates overlap with any existing booking
-      return (
-        booking.car_id === carid &&
-        (
-          ((Math.max(bookingStartDate, selectedStartDate)) < Math.min(bookingEndDate,selectedEndDate))
-        )
-      );
+  //     // Check if the selected dates overlap with any existing booking
+  //     return (
+  //       booking.car_id === carid &&
+  //       (
+  //         ((Math.max(bookingStartDate, selectedStartDate)) < Math.min(bookingEndDate,selectedEndDate))
+  //       )
+  //     );
       
-    });
+  //   });
   
-    if (isCarBooked) {
-      alert('This car is already booked for the selected dates. Please choose different dates.');
-    } else {
-      // Proceed with the booking
-      getbookings(
-        booking.bookeduser,
-        booking.car_id,
-        mobileNumber,
-        startDate,
-        endDate,
-        booking.carname,
-        booking.carcost,
-        booking.carphoto
-      );
-      console.log('Booking Successful');
-      setBooking({
-        bookeduser: localStorage.getItem('id'),
-        car_id: carid,
-        mobileNumber: mobileNumber,
-        startDate: startDate,
-        endDate: endDate,
-        carname: carname,
-        carcost: totalcostoftrip,
-        carphoto: carphoto,
-      });
-       history("/history")
+  //   if (isCarBooked) {
+  //     alert('This car is already booked for the selected dates. Please choose different dates.');
+  //   } else {
+  //     // Proceed with the booking
+  //     getbookings(
+  //       booking.bookeduser,
+  //       booking.car_id,
+  //       mobileNumber,
+  //       startDate,
+  //       endDate,
+  //       booking.carname,
+  //       booking.carcost,
+  //       booking.carphoto
+  //     );
+  //     console.log('Booking Successful');
+  //     setBooking({
+  //       bookeduser: localStorage.getItem('id'),
+  //       car_id: carid,
+  //       mobileNumber: mobileNumber,
+  //       startDate: startDate,
+  //       endDate: endDate,
+  //       carname: carname,
+  //       carcost: totalcostoftrip,
+  //       carphoto: carphoto,
+  //     });
+  //      history("/history")
+  //   }
+  // };
+  
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  // Check overlapping bookings
+  const isCarBooked = bookings.some((booking) => {
+    const bookingStartDate = new Date(booking.startDate);
+    const bookingEndDate = new Date(booking.endDate);
+    const selectedStartDate = new Date(startDate);
+    const selectedEndDate = new Date(endDate);
+
+    return (
+      booking.car_id === carid &&
+      Math.max(bookingStartDate, selectedStartDate) <
+      Math.min(bookingEndDate, selectedEndDate)
+    );
+  });
+
+  if (isCarBooked) {
+    alert("This car is already booked for selected dates");
+    return;
+  }
+
+  // Load Razorpay
+  const res = await loadRazorpay();
+  if (!res) {
+    alert("Razorpay SDK failed to load");
+    return;
+  }
+
+  // Create order
+  const orderRes = await fetch(
+    "http://localhost:5000/api/Bookingsroute/create-order",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
     }
+  );
+
+  const orderData = await orderRes.json();
+
+  const options = {
+    key: "rzp_test_RT2cv0jcxdEeZN", // 🔴 your Razorpay test key
+    amount: orderData.amount,
+    currency: "INR",
+    name: "TravelBuddy",
+    description: "Car Booking Token",
+    order_id: orderData.id,
+
+    handler: async function (response) {
+      // Call backend booking AFTER payment
+      await getbookings(
+        response,
+        {
+          car_id: carid,
+          mobileNumber,
+          startDate,
+          endDate,
+          carname,
+          carcost: totalcostoftrip,
+          carphoto,
+        }
+      );
+
+      history("/history");
+    },
+
+    theme: { color: "#28a745" },
   };
-  
-  
+
+  const paymentObject = new window.Razorpay(options);
+  paymentObject.open();
+};
+
 
   return (
     <>
@@ -155,7 +242,7 @@ const BookingCar = (props) => {
                       <p>Overall Cost Is: {defbtwtrip * tripcost}</p>
                   </div>
                   
-                  <button type="submit" className="btn btn-outline-success">Book</button>
+                  <button type="submit" className="btn btn-outline-success">Book & Pay ₹200</button>
               </form>
             </div>
           </div>

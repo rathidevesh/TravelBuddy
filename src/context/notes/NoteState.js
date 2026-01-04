@@ -115,20 +115,51 @@ const NoteState = (props) => {
   // }, [bookings]);
   
 
-  const getbookings = async(bookeduser,car_id,mobileNumber,startDate,  endDate , carname ,carcost,carphoto) => {
-    setLoading(true);
-    const response = await fetch ('http://localhost:5000/api/Bookingsroute/bookcar', {
-        method : 'POST',
-        headers : {
-          'Content-Type': 'application/json',
-          "auth-token": localStorage.getItem('token')
-        },
-        body: JSON.stringify({bookeduser,car_id,mobileNumber,startDate,  endDate , carname ,carcost,carphoto})
-    });
-    const bookingcars = await response.json();
-    setbookings(bookings.concat(bookingcars))
-    setLoading(false);
+
+// Without Payment
+  // const getbookings = async(bookeduser,car_id,mobileNumber,startDate,  endDate , carname ,carcost,carphoto) => {
+  //   setLoading(true);
+  //   const response = await fetch ('http://localhost:5000/api/Bookingsroute/bookcar', {
+  //       method : 'POST',
+  //       headers : {
+  //         'Content-Type': 'application/json',
+  //         "auth-token": localStorage.getItem('token')
+  //       },
+  //       body: JSON.stringify({bookeduser,car_id,mobileNumber,startDate,  endDate , carname ,carcost,carphoto})
+  //   });
+  //   const bookingcars = await response.json();
+  //   setbookings(bookings.concat(bookingcars))
+  //   setLoading(false);
+  // }
+
+  const getbookings = async (paymentResponse, bookingData) => {
+  setLoading(true);
+
+  const response = await fetch(
+    "http://localhost:5000/api/Bookingsroute/bookcar",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify({
+        razorpay_order_id: paymentResponse.razorpay_order_id,
+        razorpay_payment_id: paymentResponse.razorpay_payment_id,
+        razorpay_signature: paymentResponse.razorpay_signature,
+        bookingData,
+      }),
+    }
+  );
+
+  const result = await response.json();
+
+  if (result.success) {
+    setbookings(bookings.concat(result.booking));
   }
+
+  setLoading(false);
+};
 
   return (
     <NoteContext.Provider value={{loading,notes,bookings,addNote,deleteNote,editNote,getNotes,getbookings,getallbookings}}>
